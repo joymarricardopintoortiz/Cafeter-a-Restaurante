@@ -1,0 +1,404 @@
+body {
+    background: #eef0ec;
+    color: #1d2522;
+    font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+}
+
+button, input, textarea, select {
+    font-family: inherit;
+}
+
+.bg-primary {
+    background: #1f4d3f;
+}
+
+.text-primary {
+    color: #1f4d3f;
+}
+
+.bg-secondary {
+    background: #f4c95d;
+}
+
+.text-secondary {
+    color: #f4c95d;
+}
+
+.bg-negative {
+    background: #b3372f;
+}
+
+.text-negative {
+    color: #b3372f;
+}
+
+.bg-positive {
+    background: #2e7d4f;
+}
+
+.titulo {
+    font-family: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+}
+
+.pagina {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.cabecera {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.vacio {
+    text-align: center;
+    padding: 40px 16px;
+    border: 2px dashed #d5dbd4;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.texto-suave {
+    color: #55625b;
+}
+
+.filtros {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.buscador {
+    max-width: 320px;
+}
+
+.categorias {
+    border-bottom: 1px solid #d5dbd4;
+}
+
+.acciones {
+    white-space: nowrap;
+}
+
+.grilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+}
+
+.mesa-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 16px;
+}
+
+.mesa {
+    height: 100%;
+    min-height: 168px;
+    padding: 16px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.mesa--libre {
+    background: #ffffff;
+    border: 2px dashed #8ea79a;
+    color: #1d2622;
+}
+
+.mesa--ocupada {
+    background: #f4c95d;
+    border: 2px solid #d8a92d;
+    color: #2a2008;
+}
+
+.mesa__cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.mesa__rotulo {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.mesa__numero {
+    font-family: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.estado {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.mesa--libre .estado {
+    background: #e0ece6;
+    color: #1f4d3f;
+}
+
+.mesa--ocupada .estado {
+    background: #2a2008;
+    color: #1f4d3f;
+}
+
+.mesa__total {
+    font-family: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.mesa__detalle {
+    font-size: 0.875rem;
+}
+
+.mesa--libre .mesa__detalle {
+    color: #55625b;
+}
+
+.contenido {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.grilla-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.producto {
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    min-height: 112px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 12px;
+    text-align: left;
+    font: inherit;
+    color: #1d2622;
+    background: #ffffff;
+    border: 1px solid #d5dbd4;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.producto--agotado {
+    background: #e4e7e3;
+    border-style: dashed;
+    color: #55625b;
+    cursor: not-allowed;
+}
+
+.producto__cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 22px;
+}
+
+.producto__nombre {
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.producto__pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.producto__precio {
+    font-family: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 700;
+}
+
+.producto__agotado {
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.cuenta {
+    background: #ffffff;
+    border: 1px solid #d5dbd4;
+    border-radius: 16px;
+    padding: 16px 20px 20px;
+}
+
+.cuenta__cabecera {
+    padding-bottom: 12px;
+    border-bottom: 2px solid #1f4d3f;
+}
+
+.cuenta__vacia {
+    text-align: center;
+    padding: 32px 8px;
+}
+
+.lineas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.linea {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #d5dbd4;
+}
+
+.linea__total {
+    font-weight: 700;
+    text-align: right;
+}
+
+.linea__controles {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cantidad {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid #d5dbd4;
+    border-radius: 999px;
+    padding: 0 4px;
+}
+
+.cantidad__valor {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.nota {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 0;
+    margin-top: 2px;
+    background: none;
+    border: 0;
+    font: inherit;
+    font-size: 0.875rem;
+    text-align: left;
+    color: #55625b;
+    cursor: pointer;
+}
+
+.cuenta__pie {
+    margin-top: 16px;
+}
+
+.cuenta__total {
+    font-family: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.875rem;
+    font-weight: 700;
+}
+
+.dialogo {
+    width: 440px;
+    max-width: 95vw;
+}
+
+.selector {
+    border: 1px solid #d5dbd4;
+    border-radius: 8px;
+}
+
+.fila-monto {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.fila-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.total {
+    font-family: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.indicadores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 0 0 24px;
+}
+
+.indicador {
+    background: #ffffff;
+    border: 1px solid #d5dbd4;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.indicador dt {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.indicador dd {
+    margin: 0;
+}
+
+.indicador__valor {
+    margin-top: 4px;
+    font-family: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.indicador__nota {
+    margin-top: 2px;
+    font-size: 0.8125rem;
+    color: #55625b;
+}
+
+.indicador--principal {
+    background: #1f4d3f;
+    border-color: #1f4d3f;
+    color: #ffffff;
+}
+
+.indicador--principal .indicador__nota
