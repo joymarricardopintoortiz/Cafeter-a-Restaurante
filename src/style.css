@@ -401,4 +401,117 @@ button, input, textarea, select {
     color: #ffffff;
 }
 
-.indicador--principal .indicador__nota
+.indicador--principal .indicador__nota {
+    color: #d3e6dc;
+}
+
+.columnas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.bloque {
+    background: #ffffff;
+    border: 1px solid #d5dbd4;
+    border-radius: 12px;
+    padding: 16px 20px;
+}
+
+.metodos, .vendidos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.metodos li + li {
+    margin-top: 16px;
+}
+
+.vendidos li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px solid #d5dbd4;
+}
+
+.vendidos__nombre {
+    font-weight: 500;
+}
+
+.lista-cuentas {
+    background: #ffffff;
+    border-radius: 12px;
+}
+
+.lado {
+    color: #1d2622;
+}
+
+.detalle {
+    padding: 4px 16px 16px;
+}
+
+.lineas-detalle {
+    list-style: none;
+    margin: 0 0 12px;
+    padding: 0;
+}
+
+.lineas-detalle li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 4px 0;
+}
+
+.pago {
+    margin: 0;
+    padding-top: 8px;
+    border-top: 1px solid #d5dbd4;
+}
+
+.pago div {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+}
+
+.pago dt {
+    color: #55625b;
+}
+
+.pago dd {
+    margin: 0;
+    font-weight: 500;
+}
+
+.aviso {
+    background: #fbeab9;
+}
+
+.tabs-vista {
+    border-bottom: 1px solid #d5dbd4;
+    margin-bottom: 20px;
+}
+
+.paneles {
+    background: transparent;
+}
+
+.lista-historial {
+    background: #ffffff;
+    border-radius: 12px;
+}
+
+.menu-activo {
+    background: #e0ece6;
+    color: #1f4d3f;
+    font-weight: 600;
+}
+
+.q-drawer__content {
+    overscroll-behavior: contain;
+}
