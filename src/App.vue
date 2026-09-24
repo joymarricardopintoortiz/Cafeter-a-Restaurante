@@ -52,6 +52,7 @@ const route = useRoute()
 const drawerAbierto = ref(false)
 
 const secciones = [
+  { nombre: 'inicio', etiqueta: 'Bienvenida', icono: 'home', destino: { name: 'inicio' }},
   { nombre: 'salon', etiqueta: 'Salón', icono: 'table_restaurant', destino: { name: 'salon' } },
   { nombre: 'menu', etiqueta: 'Menú', icono: 'restaurant_menu', destino: { name: 'menu' } },
   { nombre: 'cierre', etiqueta: 'Cierre del día', icono: 'point_of_sale', destino: { name: 'cierre' } }

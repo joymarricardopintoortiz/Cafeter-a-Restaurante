@@ -1,9 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SalonView from '../views/SalonView.vue'
+import InicioView from '../views/InicioView.vue'
 
 const routes = [
   {
     path: '/',
+    name: 'inicio',
+    component: InicioView,
+    meta: { seccion: 'inicio', titulo: 'Bienvenido' }
+  },
+  {
+    path: '/salon',
     name: 'salon',
     component: SalonView,
     meta: { seccion: 'salon', titulo: 'Salón' }
