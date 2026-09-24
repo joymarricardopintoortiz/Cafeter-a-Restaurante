@@ -56,6 +56,10 @@ button, input, textarea, select {
     margin-bottom: 20px;
 }
 
+.cabecera-inicio {
+    margin-bottom: 24px;
+}
+
 .vacio {
     text-align: center;
     padding: 40px 16px;
@@ -514,4 +518,61 @@ button, input, textarea, select {
 
 .q-drawer__content {
     overscroll-behavior: contain;
+}
+
+.cabecera-inicio--centrada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.intro-inicio {
+    max-width: 680px;
+}
+
+.indicadores-inicio {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin: 28px 0;
+}
+
+.indicador-inicio {
+    background: #ffffff;
+    border: 1px solid #d5dbd4;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.indicador-inicio__valor {
+    font-family: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.indicador-inicio__etiqueta {
+    font-size: 13px;
+}
+
+.bloque--centrado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.bloque--clicable {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.bloque--clicable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }

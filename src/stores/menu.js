@@ -56,5 +56,4 @@ export const useMenuStore = defineStore(
             actualizar, alternarDisponibilidad, eliminar
         }
     },
-    { persist: true }
 )
