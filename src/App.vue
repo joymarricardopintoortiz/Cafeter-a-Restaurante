@@ -15,7 +15,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="drawerAbierto" show-if-above side="left" bordered :width="240">
+    <q-drawer v-model="drawerAbierto" side="left" bordered :width="240">
       <q-list padding>
         <q-item
           v-for="seccion in secciones"

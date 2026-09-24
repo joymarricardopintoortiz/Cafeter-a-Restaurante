@@ -66,7 +66,7 @@ function guardarProducto(datos) {
 function alternarDisponibilidad(producto) {
   menu.alternarDisponibilidad(producto.id)
   $q.notify({
-    type: producto.disponible ? 'warning' : 'positive',
+    type: producto.disponible ? 'positive' : 'warning',
     message: producto.disponible
       ? `${producto.nombre} marcado como agotado`
       : `${producto.nombre} disponible de nuevo`
