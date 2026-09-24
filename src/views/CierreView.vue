@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
 import { useQuasar } from 'quasar'
+import { computed, ref } from 'vue'
 import { useCuentasStore } from '../stores/cuentas.js'
 import { useCierresStore } from '../stores/cierres.js'
 import { formatoFecha, formatoFechaCorta } from '../utils/format.js'
@@ -13,6 +13,8 @@ const cierres = useCierresStore()
 const pestana = ref('hoy')
 const dialogoCierre = ref(false)
 const observaciones = ref('')
+
+const puedeConfirmar = computed(() => observaciones.value.trim().length > 0)
 
 function abrirCierre() {
   observaciones.value = ''
@@ -51,9 +53,15 @@ function confirmarCierre() {
       <template #avatar>
         <q-icon name="info" color="warning" />
       </template>
-      Todavía hay {{ cuentas.abiertas.length }}
-      {{ cuentas.abiertas.length === 1 ? 'mesa abierta' : 'mesas abiertas' }}. Cóbralas o cancélalas
-      antes de cerrar el día.
+      <template v-if="cuentas.abiertas.length">
+        Todavía hay {{ cuentas.abiertas.length }}
+        {{ cuentas.abiertas.length === 1 ? 'mesa abierta' : 'mesas abiertas' }}. Cóbralas o cancélalas
+        antes de cerrar el día.
+      </template>
+      <template v-else>
+        Todavía no se ha cobrado ninguna cuenta hoy. Registra al menos una venta antes de cerrar
+        el día.
+      </template>
     </q-banner>
 
     <q-tabs
@@ -124,8 +132,10 @@ function confirmarCierre() {
             rows="3"
             maxlength="200"
             counter
-            label="Observaciones (opcional)"
+            label="Observaciones"
             placeholder="Novedades del turno, incidencias, lo que sea útil para mañana"
+            :rules="[val => !!val?.trim() || 'Escribe alguna observacion antes de cerrar el dia']"
+            lazy-rules
           />
         </q-card-section>
 
@@ -137,6 +147,8 @@ function confirmarCierre() {
             color="primary"
             icon="task_alt"
             label="Confirmar cierre"
+            :disable="!puedeConfirmar"
+            v-close-popup
             @click="confirmarCierre"
           />
         </q-card-actions>

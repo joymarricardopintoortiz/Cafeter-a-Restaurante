@@ -11,16 +11,19 @@ export const useCierresStore = defineStore(
         const historial = ref([])
         const jornadaInicio = ref(Date.now())
         const resumenActual = computed(() =>  construirResumen(cuentasStore.cuentas))
-        const puedeCerrar = computed(() => cuentasStore.abiertas.length === 0)
+        const puedeCerrar = computed(
+            () => cuentasStore.abiertas.length === 0 && resumenActual.value.cuentasPagadas > 0
+        )
 
         function cerrarDia(observaciones = '') {
-            if (!puedeCerrar.value) return null
+            const texto = observaciones.trim()
+            if (!puedeCerrar.value || !texto) return null
 
             const registro = {
                 id: crearId(),
                 inicio: jornadaInicio.value,
                 cierre: Date.now(),
-                observaciones: observaciones.trim(),
+                observaciones: texto,
                 resumen: construirResumen(cuentasStore.cuentas),
                 cuentas: JSON.parse(JSON.stringify(cuentasStore.cerradas))
             }
