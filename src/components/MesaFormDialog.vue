@@ -36,7 +36,7 @@ function guardar() {
 </script>
 
 <template>
-  <q-dialog v-model="abierto">
+  <q-dialog v-model="abierto" persistent>
     <q-card class="dialogo">
       <q-form @submit="guardar">
         <q-card-section>

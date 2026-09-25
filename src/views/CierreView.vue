@@ -112,7 +112,7 @@ function confirmarCierre() {
       </q-tab-panel>
     </q-tab-panels>
 
-    <q-dialog v-model="dialogoCierre">
+    <q-dialog v-model="dialogoCierre" persistent>
       <q-card class="dialogo">
         <q-card-section>
           <h2 class="titulo text-h6 q-my-none">Cerrar el día</h2>

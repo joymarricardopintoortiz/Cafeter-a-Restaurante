@@ -63,7 +63,7 @@ function confirmar() {
 </script>
 
 <template>
-  <q-dialog v-model="abierto">
+  <q-dialog v-model="abierto" persistent>
     <q-card class="dialogo">
       <q-card-section>
         <h2 class="titulo text-h6 q-my-none">Cobrar mesa {{ mesaNumero }}</h2>
