@@ -576,3 +576,15 @@ button, input, textarea, select {
     transform: translateY(-2px);
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
+
+.bloque--resumen {
+    display: flex;
+    flex-direction: column;
+    height: 220px;
+}
+
+.bloque--resumen .metodos, .bloque--resumen .vendidos {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 4px;
+}

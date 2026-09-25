@@ -72,7 +72,7 @@ const restantes = computed(() => Math.max(0, props.resumen.productos.length - LI
       </dl>
 
       <div class="columnas">
-        <section class="bloque">
+        <section class="bloque bloque--resumen">
           <h3 class="titulo text-h6 q-mt-none q-mb-md">Cobrado por método de pago</h3>
           <ul class="metodos">
             <li v-for="metodo in metodos" :key="metodo.valor">
@@ -96,9 +96,9 @@ const restantes = computed(() => Math.max(0, props.resumen.productos.length - LI
           </ul>
         </section>
 
-        <section class="bloque">
+        <section class="bloque bloque--resumen">
           <h3 class="titulo text-h6 q-mt-none q-mb-md">Productos más vendidos</h3>
-          <ul v-if="masVendidos.length" class="vendidos">
+          <ul v-if="masVendidos.length" class="vendidos vendidos--scroll">
             <li v-for="producto in masVendidos" :key="producto.productoId">
               <span class="vendidos__nombre">{{ producto.nombre }}</span>
               <span class="texto-suave">{{ producto.cantidad }} und.</span>
