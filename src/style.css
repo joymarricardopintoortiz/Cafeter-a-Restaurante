@@ -715,6 +715,9 @@ button, input, textarea, select {
   .dialogo {
     width: 96vw;
   }
+  .selector .q-btn__content {
+    font-size: 0.7rem;
+  }
 }
 
 @media (max-width: 300px) {
