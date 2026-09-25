@@ -1,15 +1,15 @@
 <script setup>
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { formatoFecha } from '../utils/format.js'
+import { formatoFecha, formatoMoneda } from '../utils/format.js'
 import { useMesasStore } from '../stores/mesas.js'
 import { useCuentasStore } from '../stores/cuentas.js'
 import { useMenuStore } from '../stores/menu.js'
+import { useCierresStore } from '../stores/cierres.js'
 
-const router = useRouter()
 const mesasStore = useMesasStore()
 const cuentasStore = useCuentasStore()
 const menuStore = useMenuStore()
+const cierresStore = useCierresStore()
 
 const ahora = new Date()
 
@@ -27,7 +27,8 @@ const mesasLibres = computed(() => mesasStore.mesas.length - mesasOcupadas.value
 const productosDisponibles = computed(
   () => menuStore.productos.filter((p) => p.disponible).length
 )
-const ventasHoy = computed(() => cuentasStore.cerradas.filter((c) => c.estado === 'pagada').length)
+const productosAgotados = computed(() => menuStore.agotados.length)
+const ventasHoy = computed(() => cierresStore.resumenActual.cuentasPagadas)
 
 const indicadores = computed(() => [
   { valor: mesasLibres.value, etiqueta: 'Mesas libres', icono: 'event_seat', color: 'positive' },
@@ -36,29 +37,29 @@ const indicadores = computed(() => [
   { valor: ventasHoy.value, etiqueta: 'Cuentas cobradas hoy', icono: 'point_of_sale', color: 'secondary' }
 ])
 
-const secciones = [
+const secciones = computed(() => [
   {
     nombre: 'Salón',
     icono: 'table_restaurant',
-    ruta: 'salon',
     descripcion:
-      'Muestra el estado de cada mesa del local: cuáles están libres y cuáles ocupadas, con el total que lleva consumido cada una y el tiempo que llevan abiertas.'
+      'Muestra el estado de cada mesa del local: cuáles están libres y cuáles ocupadas, con el total que lleva consumido cada una y el tiempo que llevan abiertas.',
+    detalle: `${mesasOcupadas.value} de ${mesasStore.mesas.length} mesas ocupadas ahora`
   },
   {
     nombre: 'Menú',
     icono: 'restaurant_menu',
-    ruta: 'menu',
     descripcion:
-      'Aquí se administran los productos que ofrece la cafetería: se pueden crear, editar el precio o la categoría, y marcar cada uno como disponible o agotado.'
+      'Aquí se administran los productos que ofrece la cafetería: se pueden crear, editar el precio o la categoría, y marcar cada uno como disponible o agotado.',
+    detalle: `${productosDisponibles.value} disponibles, ${productosAgotados.value} agotados`
   },
   {
     nombre: 'Cierre del día',
     icono: 'point_of_sale',
-    ruta: 'cierre',
     descripcion:
-      'Al terminar el turno, esta pantalla muestra cuánto se vendió, por qué método se cobró y qué productos fueron los más pedidos, y permite cerrar la jornada.'
+      'Al terminar el turno, esta pantalla muestra cuánto se vendió, por qué método se cobró y qué productos fueron los más pedidos, y permite cerrar la jornada.',
+    detalle: `${formatoMoneda(cierresStore.resumenActual.totalCobrado)} cobrados en ${ventasHoy.value} cuentas hoy`
   }
-]
+])
 </script>
 
 <template>
@@ -68,18 +69,17 @@ const secciones = [
       <h1 class="titulo text-h5 q-my-none">{{ saludo }}</h1>
       <p class="text-body2 texto-suave q-mt-xs q-mb-none">{{ fechaHoy }}</p>
       <p class="text-body1 q-mt-md q-mb-none intro-inicio">
-        Este sistema reemplaza por completo la libreta de papel de la cafeteria, Cada vez que
+        Este sistema reemplaza por completo la libreta de papel de la cafetería. Cada vez que
         alguien se sienta en una mesa, se pueden ir agregando los productos que va pidiendo,
-        llevar el control de cuanto lleva consumido y, al final, cerrar la cuenta indicando como
-        pago. Todo el estado del local (mesas libres, ocupadas y sus totales) se actualiza al
+        llevar el control de cuánto lleva consumido y, al final, cerrar la cuenta indicando cómo
+        pagó. Todo el estado del local (mesas libres, ocupadas y sus totales) se actualiza al
         instante y queda visible desde cualquier pantalla.
       </p>
-      <p class="text.body1 q-mt-sm q-mb-none intro-inicio">
-        Desde el menu de la izquierda puedes moverte entre las 3 partes del sistema: el
-        <strong>Salón</strong>, donde se gestionan las mesas y sus pedidos; el <strong>Menu</strong>,
-        donde se administran los productos y su disponibilidad; y el <strong>Cierre del dia</strong>,
-        donde se resume todo lo vendido en la jornada y se puede cerrar el turno. Tambien puedes
-        entrar directo a cada una desde las tarjetas de abajo.
+      <p class="text-body1 q-mt-sm q-mb-none intro-inicio">
+        Desde el menú de la izquierda puedes moverte entre las 3 partes del sistema: el
+        <strong>Salón</strong>, donde se gestionan las mesas y sus pedidos; el <strong>Menú</strong>,
+        donde se administran los productos y su disponibilidad; y el <strong>Cierre del día</strong>,
+        donde se resume todo lo vendido en la jornada y se puede cerrar el turno.
       </p>
     </div>
 
@@ -92,23 +92,13 @@ const secciones = [
     </div>
 
     <div class="columnas">
-      <div
-        v-for="seccion in secciones"
-        :key="seccion.nombre"
-        class="bloque bloque--centrado bloque--clicable"
-        @click="router.push({ name: seccion.ruta })"
-      >
+      <div v-for="seccion in secciones" :key="seccion.nombre" class="bloque bloque--centrado">
         <q-icon :name="seccion.icono" size="32px" color="primary" class="q-mb-sm" />
         <h2 class="titulo text-h6 q-my-none">{{ seccion.nombre }}</h2>
         <p class="text-body2 texto-suave q-mt-sm q-mb-none">{{ seccion.descripcion }}</p>
-        <q-btn
-          flat
-          dense
-          color="primary"
-          label="Entrar"
-          icon-right="arrow_forward"
-          class="q-mt-md"
-        />
+        <p class="text-body2 q-mt-sm q-mb-none">
+          <strong>{{ seccion.detalle }}</strong>
+        </p>
       </div>
     </div>
   </q-page>
