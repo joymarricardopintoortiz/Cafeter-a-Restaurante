@@ -38,21 +38,49 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <div v-if="cargando" class="overlay-carga">
+      <q-spinner color="primary" size="4em" :thickness="4" />
+      <p class="overlay-carga__texto">Cargando...</p>
+    </div>
   </q-layout>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 
 const $q = useQuasar()
 const route = useRoute()
+const router = useRouter()
 
 const drawerAbierto = ref(false)
+const cargando = ref(false)
+
+let inicioCarga = 0
+const DURACION_MINIMA = 500
+
+router.beforeEach((to, from, next) => {
+  inicioCarga = Date.now()
+  cargando.value = true
+  next()
+})
+
+router.afterEach(() => {
+  const transcurrido = Date.now() - inicioCarga
+  const restante = Math.max(0, DURACION_MINIMA - transcurrido)
+  setTimeout(() => {
+    cargando.value = false
+  }, restante)
+})
+
+router.onError(() => {
+  cargando.value = false
+})
 
 const secciones = [
-  { nombre: 'inicio', etiqueta: 'Bienvenida', icono: 'home', destino: { name: 'inicio' }},
+  { nombre: 'inicio', etiqueta: 'Bienvenida', icono: 'home', destino: { name: 'inicio' } },
   { nombre: 'salon', etiqueta: 'Salón', icono: 'table_restaurant', destino: { name: 'salon' } },
   { nombre: 'menu', etiqueta: 'Menú', icono: 'restaurant_menu', destino: { name: 'menu' } },
   { nombre: 'cierre', etiqueta: 'Cierre del día', icono: 'point_of_sale', destino: { name: 'cierre' } }
