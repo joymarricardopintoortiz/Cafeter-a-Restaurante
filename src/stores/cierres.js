@@ -16,14 +16,13 @@ export const useCierresStore = defineStore(
         )
 
         function cerrarDia(observaciones = '') {
-            const texto = observaciones.trim()
-            if (!puedeCerrar.value || !texto) return null
+            if (!puedeCerrar.value) return null
 
             const registro = {
                 id: crearId(),
                 inicio: jornadaInicio.value,
                 cierre: Date.now(),
-                observaciones: texto,
+                observaciones: observaciones.trim(),
                 resumen: construirResumen(cuentasStore.cuentas),
                 cuentas: JSON.parse(JSON.stringify(cuentasStore.cerradas))
             }

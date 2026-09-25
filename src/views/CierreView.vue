@@ -14,8 +14,6 @@ const pestana = ref('hoy')
 const dialogoCierre = ref(false)
 const observaciones = ref('')
 
-const puedeConfirmar = computed(() => observaciones.value.trim().length > 0)
-
 function abrirCierre() {
   observaciones.value = ''
   dialogoCierre.value = true
@@ -134,8 +132,6 @@ function confirmarCierre() {
             counter
             label="Observaciones"
             placeholder="Novedades del turno, incidencias, lo que sea útil para mañana"
-            :rules="[val => !!val?.trim() || 'Escribe alguna observacion antes de cerrar el dia']"
-            lazy-rules
           />
         </q-card-section>
 
@@ -147,7 +143,6 @@ function confirmarCierre() {
             color="primary"
             icon="task_alt"
             label="Confirmar cierre"
-            :disable="!puedeConfirmar"
             v-close-popup
             @click="confirmarCierre"
           />
